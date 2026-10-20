@@ -1,62 +1,45 @@
-# Week 10: Circom and snarkjs
+# Week 10 — Circom fundamentals and design patterns
 
-**Source of truth:** [12-week curriculum](../CURRICULUM.md). Daily workload: 2–3 hours; Day 6 is a timed assessment; Day 7 rest/catch-up. This is an independent curriculum, not RareSkills' proprietary bootcamp.
+**Goal:** write correct Circom 2 circuits, and see that the R1CS Circom generates is the same thing you built by hand in Week 5.
 
-## Required RareSkills readings
+**Reading (in order):** [Intro to Circom](https://rareskills.io/post/circom-intro) · [Hello world](https://rareskills.io/post/hello-world-circom) · [Syntax: parameters, loops, if, assert](https://rareskills.io/post/circom-syntax) · [Quadratic constraints](https://rareskills.io/post/quadratic-constraints) · [Symbolic variables](https://rareskills.io/post/circom-symbolic-variable) · [Intermediate signals and sub-components](https://rareskills.io/post/circom-intermediate-signals) · [Public and private inputs](https://rareskills.io/post/circom-public-private-inputs) · [Indicate then constrain](https://rareskills.io/post/indicate-then-constrain) · [Compute then constrain](https://rareskills.io/post/compute-then-constrain)
+**Docs:** [Circom](https://docs.circom.io/) · [snarkjs](https://github.com/iden3/snarkjs) · [circomlib](https://github.com/iden3/circomlib)
+**Video:** [ZKP MOOC Lecture 3: Programming ZKPs](https://www.youtube.com/watch?v=UpRSaG6iuks) (Day 1)
 
-- [Circom introduction](https://rareskills.io/post/circom-intro)
-- [Hello World Circom](https://rareskills.io/post/hello-world-circom)
-- [Circom syntax](https://rareskills.io/post/circom-syntax)
-- [Public/private inputs](https://rareskills.io/post/circom-public-private-inputs)
+## Day 1 — Toolchain and hello world
+- Install Circom 2 and snarkjs (see the Circom docs). Watch the Berkeley lecture.
+- Read *Intro* and *Hello world*. Compile hello world, print its R1CS with `snarkjs r1cs print`, and compare it to what you would have written by hand.
+- **Deliverable:** `solutions/week-10/hello/` with build commands in a README
 
-## Specific YouTube videos
+## Day 2 — Syntax and quadratic constraints
+- Read *Syntax* and *Quadratic constraints*.
+- Re-implement `out = x³ + x + 5` in Circom. Confirm it compiles to exactly 2 constraints, the same as your `src/r1cs.py`. Then write `out = x⁴ − 2xy + y²` and match your Week 5 exam answer.
+- **Deliverable:** both circuits + constraint counts
 
-- [Introduction to zk-SNARKs with circom and snarkjs examples — Dimitrios Kouzis-Loukas](https://www.youtube.com/watch?v=Oaub9QwwgCA) — Circom/snarkjs end-to-end supplementary demonstration
-- [Build Your First Zero-Knowledge Proof (ZKP) — Circom + SnarkJS](https://www.youtube.com/watch?v=NG2NX1cDGUs) — Circom/snarkjs end-to-end supplementary demonstration
+## Day 3 — Signals, variables, sub-components
+- Read *Symbolic variables* and *Intermediate signals and sub-components*.
+- Build a `Polynomial(N)` template that evaluates a degree-N polynomial with public coefficients at a private x, using a loop and intermediate signals.
+- **Deliverable:** circuit + witness tests for N = 3 and N = 5
 
-These are identifiable videos, **not** video-search pages. Some are broader than the week's subject; the RareSkills articles are the precise technical reading. No claim that a video covers every mathematical detail.
+## Day 4 — Public vs private, end to end
+- Read *Public and private inputs*.
+- Run the full Groth16 flow for `Polynomial(3)`: powers-of-tau, circuit setup, witness, proof, verify. Then change one public input in `public.json` and confirm verification fails.
+- **Deliverable:** script `solutions/week-10/run.sh` that runs it all
 
-## Daily assignments
+## Day 5 — The two core patterns
+- Read *Indicate then constrain* and *Compute then constrain*.
+- Write `IsZero` from scratch using a `<--` hint for the inverse and the constraints that make it sound. Then write `IsEqual` from `IsZero`. Test every edge case, including `in = 0`.
+- **Deliverable:** `solutions/week-10/iszero.circom` + test inputs
 
-### Day 1
-Read [Circom introduction](https://rareskills.io/post/circom-intro). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
+## Day 6 — Exam (120 min, closed notes)
+1. **Theory (30):** Explain the difference between `<--`, `<==` and `===`, and why `<--` alone is dangerous. Explain why a circuit cannot "branch".
+2. **Coding (50):** Write `Max2()` that outputs the larger of two 8-bit inputs, using circomlib comparators, with a full proof/verify run and 3 valid / 2 invalid witness attempts.
+3. **Debugging (20):** An `IsZero` uses `inv <-- in != 0 ? 1/in : 0; out <== -in*inv + 1;` and nothing else. Find an input and a malicious `inv` that give the wrong output, and add the missing constraint.
 
-Deliverable: `solutions/week-10/day-1/` with code, tests, and notes.
+## Day 7 — Rest or catch up
 
-### Day 2
-Read [Hello World Circom](https://rareskills.io/post/hello-world-circom). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
-
-Deliverable: `solutions/week-10/day-2/` with code, tests, and notes.
-
-### Day 3
-Read [Circom syntax](https://rareskills.io/post/circom-syntax). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
-
-Deliverable: `solutions/week-10/day-3/` with code, tests, and notes.
-
-### Day 4
-Read [Public/private inputs](https://rareskills.io/post/circom-public-private-inputs). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
-
-Deliverable: `solutions/week-10/day-4/` with code, tests, and notes.
-
-### Day 5
-Revisit [Circom introduction](https://rareskills.io/post/circom-intro). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-10/day-5/` with code, tests, and notes.
-
-### Day 6 — Mock bootcamp exam (120 minutes, 100 points)
-
-1. **Theory (30 points):** Derive the central equation or property from this week's required articles; state every assumption.
-2. **Programming (50 points):** Implement a fresh example of the week's main technique using new inputs; write at least 3 passing tests and 2 adversarial tests.
-3. **Debugging (20 points):** Explain a broken constraint, invalid witness, or arithmetic failure and provide a corrected version.
-
-Pass: 75/100. Distinction: 90/100. Submit an exam report with score, code, tests and reflection.
-
-### Day 7 — Rest / catch-up
-
-## Weekly exit criteria
-
-- [ ] All assigned articles read
-- [ ] Video watched with notes (supplementary)
-- [ ] Worked derivation committed
-- [ ] Implementation tested, including adversarial inputs
-- [ ] Mock exam attempted and score recorded in `progress.csv`
+## Exit criteria
+- [ ] Full Circom → snarkjs Groth16 flow runs from one script
+- [ ] Your Circom cubic compiles to the same R1CS as your hand-written one
+- [ ] Can write `IsZero` correctly from memory
+- [ ] Exam score in `progress.csv`

@@ -1,58 +1,45 @@
-# Week 9: Groth16
+# Week 9 — Groth16
 
-**Source of truth:** [12-week curriculum](../CURRICULUM.md). Daily workload: 2–3 hours; Day 6 is a timed assessment; Day 7 rest/catch-up. This is an independent curriculum, not RareSkills' proprietary bootcamp.
+**Goal:** implement Groth16 setup, prover and verifier yourself, and know what every element is for. This is the core week of the course; give it full attention.
 
-## Required RareSkills readings
+**Reading:** [Groth16 explained](https://rareskills.io/post/groth16) · written companion: [zkSecurity — How Groth16 works](https://blog.zksecurity.xyz/posts/pudding-10-groth16/)
+**Video:** [How Groth16 Works — David Wong](https://www.youtube.com/watch?v=8Tl20_XUZLI) (~1 h, split over Days 1 and 3). Optional second view: [DoraHacks — Groth16](https://www.youtube.com/watch?v=VQyDSxB9Bls)
+**Code:** `solutions/week-09/groth16.py`, built on your `src/qap.py` and py_ecc
 
-- [Groth16 explained](https://rareskills.io/post/groth16)
+## Day 1 — α and β: stopping the forgery
+- Read *Groth16* up to the introduction of α and β; watch the first half of the video.
+- Take your Week 8 forgery list. Show how adding `[α]1`, `[β]2` to the setup and `e(A, B) = e(α, β) · e(C, G2)` blocks the Day-4 forgery. Implement this intermediate scheme.
+- **Deliverable:** intermediate scheme + forgery now fails
 
-## Specific YouTube videos
+## Day 2 — Public inputs: γ and δ
+- Continue *Groth16*: splitting the witness into public and private parts, and the γ and δ separation.
+- Implement the full setup: for each witness column compute `βUᵢ(τ) + αVᵢ(τ) + Wᵢ(τ)`, divided by γ for public slots and δ for private ones; plus `[τⁱ t(τ)/δ]1`.
+- **Deliverable:** `setup(qap, n_public)` returning proving and verifying keys
 
-- [What is a SNARK? — Dan Boneh (ZK Whiteboard Sessions)](https://www.youtube.com/watch?v=h-94UhJLeck) — SNARK overview and circuit intuition
+## Day 3 — The prover with blinding
+- Finish the article and the video.
+- Implement `prove`: compute A, B, C with random r and s. Check that two proofs of the same witness look unrelated.
+- **Deliverable:** `prove(pk, witness)`
 
-These are identifiable videos, **not** video-search pages. Some are broader than the week's subject; the RareSkills articles are the precise technical reading. No claim that a video covers every mathematical detail.
+## Day 4 — The verifier
+- Implement `verify(vk, public_inputs, proof)` with the 4-pairing equation `e(A, B) = e(α, β) · e(Σ pubᵢ·Kᵢ, γ) · e(C, δ)`.
+- Tests: valid proof passes; changing any public input fails; using a proof for a different statement fails; a forged proof from Week 8 fails.
+- **Deliverable:** full end-to-end Groth16 for the cubic circuit, with tests
 
-## Daily assignments
+## Day 5 — Malleability
+- Show that `(−A, −B, C)` is also a valid proof, and that `(A·k⁻¹, B·k, C)` is valid for any non-zero k. Take a valid proof, transform it, and confirm `verify` accepts it.
+- Write down what this means for applications: **a proof is not a unique identifier**. Never use proof bytes as a nullifier or replay key. You'll test this on-chain in Week 12.
+- **Deliverable:** `solutions/week-09/malleability.py` + notes
 
-### Day 1
-Read [Groth16 explained](https://rareskills.io/post/groth16). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
+## Day 6 — Exam (120 min, closed notes)
+1. **Theory (30):** Write the Groth16 verification equation and explain the purpose of α, β, γ, δ, r, s. What breaks if δ is removed?
+2. **Coding (50):** Without looking at your solution, implement `verify` and write the 4 tests from Day 4.
+3. **Debugging (20):** A setup uses δ for both public and private slots (no γ). Show how a prover can change a public input and still produce an accepting proof, or explain precisely why the separation matters.
 
-Deliverable: `solutions/week-09/day-1/` with code, tests, and notes.
+## Day 7 — Rest or catch up
 
-### Day 2
-Revisit [Groth16 explained](https://rareskills.io/post/groth16). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-09/day-2/` with code, tests, and notes.
-
-### Day 3
-Revisit [Groth16 explained](https://rareskills.io/post/groth16). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-09/day-3/` with code, tests, and notes.
-
-### Day 4
-Revisit [Groth16 explained](https://rareskills.io/post/groth16). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-09/day-4/` with code, tests, and notes.
-
-### Day 5
-Revisit [Groth16 explained](https://rareskills.io/post/groth16). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-09/day-5/` with code, tests, and notes.
-
-### Day 6 — Mock bootcamp exam (120 minutes, 100 points)
-
-1. **Theory (30 points):** Derive the central equation or property from this week's required articles; state every assumption.
-2. **Programming (50 points):** Implement a fresh example of the week's main technique using new inputs; write at least 3 passing tests and 2 adversarial tests.
-3. **Debugging (20 points):** Explain a broken constraint, invalid witness, or arithmetic failure and provide a corrected version.
-
-Pass: 75/100. Distinction: 90/100. Submit an exam report with score, code, tests and reflection.
-
-### Day 7 — Rest / catch-up
-
-## Weekly exit criteria
-
-- [ ] All assigned articles read
-- [ ] Video watched with notes (supplementary)
-- [ ] Worked derivation committed
-- [ ] Implementation tested, including adversarial inputs
-- [ ] Mock exam attempted and score recorded in `progress.csv`
+## Exit criteria
+- [ ] Working Groth16 in Python with your own setup, prover and verifier
+- [ ] Can write the verification equation from memory and explain every term
+- [ ] Can demonstrate proof malleability
+- [ ] Exam score in `progress.csv`

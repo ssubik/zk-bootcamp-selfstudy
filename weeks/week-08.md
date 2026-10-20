@@ -1,59 +1,44 @@
-# Week 8: Trusted setup and Pinocchio
+# Week 8 — Trusted setup and evaluating a QAP on it
 
-**Source of truth:** [12-week curriculum](../CURRICULUM.md). Daily workload: 2–3 hours; Day 6 is a timed assessment; Day 7 rest/catch-up. This is an independent curriculum, not RareSkills' proprietary bootcamp.
+**Goal:** evaluate polynomials at a secret point τ that nobody knows, using powers of τ hidden in elliptic-curve points. Build the naive SNARK, then break it — that's the motivation for Groth16.
 
-## Required RareSkills readings
+**Reading:** [Trusted setup](https://rareskills.io/post/trusted-setup) · [Evaluating a QAP on a trusted setup](https://rareskills.io/post/elliptic-curve-qap)
+**Video:** [Powers of Tau — Solidity Fridays](https://www.youtube.com/watch?v=TcQXzGTSXfo) (Day 5)
 
-- [Trusted setup](https://rareskills.io/post/trusted-setup)
-- [QAP on trusted setup](https://rareskills.io/post/elliptic-curve-qap)
+## Day 1 — Powers of tau
+- Read *Trusted setup*.
+- In Python with py_ecc: generate `[τ⁰]G1 … [τᵈ]G1` and `[τ⁰]G2 … [τᵈ]G2`. Write `eval_hidden(f, srs)` that returns `[f(τ)]G1` from the coefficients of f and the SRS alone, then check it against `multiply(G1, f(τ))`.
+- **Deliverable:** `solutions/week-08/srs.py` with tests
 
-## Specific YouTube videos
+## Day 2 — Checking a product in the exponent
+- Using your SRS, the prover sends `[f(τ)]G1`, `[g(τ)]G2`, `[h(τ)]G1`. The verifier checks `f(τ)·g(τ) = h(τ)` with one pairing equation. Test valid and invalid triples.
+- **Deliverable:** `solutions/week-08/product_check.py`
 
-- [What is a SNARK? — Dan Boneh (ZK Whiteboard Sessions)](https://www.youtube.com/watch?v=h-94UhJLeck) — SNARK overview and circuit intuition
+## Day 3 — The naive QAP SNARK
+- Read *Evaluating a QAP on a trusted setup*.
+- Plug in your Week 7 QAP: the setup also publishes `[t(τ)·τⁱ]G1`, the prover computes `[A]1 = [u(τ)]1`, `[B]2 = [v(τ)]2`, `[C]1 = [w(τ) + h(τ)t(τ)]1`, and the verifier checks `e(A, B) = e(C, G2)`.
+- **Deliverable:** end-to-end prove + verify for the cubic circuit
 
-These are identifiable videos, **not** video-search pages. Some are broader than the week's subject; the RareSkills articles are the precise technical reading. No claim that a video covers every mathematical detail.
+## Day 4 — Break it
+- Forge a proof without a witness: pick any `A`, `B` and set `C` so the equation holds. Then forge one where `A` is not even a combination of the circuit's U polynomials.
+- Write a list of everything the verifier fails to enforce (A, B, C come from the circuit; the same witness is used in all three; public inputs are bound). Groth16 fixes each item — keep the list for Week 9.
+- **Deliverable:** `solutions/week-08/forgery.py` + `solutions/week-08/what_is_missing.md`
 
-## Daily assignments
+## Day 5 — Ceremonies
+- Watch the Powers of Tau video.
+- Simulate a 3-party ceremony: each participant multiplies the previous SRS by their own secret. Show that the final τ is the product of all secrets, and that one honest participant who deletes their secret is enough.
+- How would a participant prove they used the same secret across all powers? Sketch the pairing check.
+- **Deliverable:** `solutions/week-08/ceremony.py`
 
-### Day 1
-Read [Trusted setup](https://rareskills.io/post/trusted-setup). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
+## Day 6 — Exam (120 min, closed notes)
+1. **Theory (30):** Explain what "toxic waste" is and show concretely how knowing τ lets someone forge a proof for the naive scheme.
+2. **Coding (50):** From scratch, build an SRS of degree 4 and evaluate a hidden polynomial; then implement the verifier's pairing check for `f(τ)g(τ) = h(τ)` with 2 valid and 2 invalid tests.
+3. **Debugging (20):** A ceremony implementation updates `[τⁱ]G1` with the new secret but forgets to update `[τⁱ]G2`. Show the check that catches it and what an attacker could do if nobody checks.
 
-Deliverable: `solutions/week-08/day-1/` with code, tests, and notes.
+## Day 7 — Rest or catch up
 
-### Day 2
-Read [QAP on trusted setup](https://rareskills.io/post/elliptic-curve-qap). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
-
-Deliverable: `solutions/week-08/day-2/` with code, tests, and notes.
-
-### Day 3
-Revisit [Trusted setup](https://rareskills.io/post/trusted-setup). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-08/day-3/` with code, tests, and notes.
-
-### Day 4
-Revisit [QAP on trusted setup](https://rareskills.io/post/elliptic-curve-qap). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-08/day-4/` with code, tests, and notes.
-
-### Day 5
-Revisit [Trusted setup](https://rareskills.io/post/trusted-setup). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
-
-Deliverable: `solutions/week-08/day-5/` with code, tests, and notes.
-
-### Day 6 — Mock bootcamp exam (120 minutes, 100 points)
-
-1. **Theory (30 points):** Derive the central equation or property from this week's required articles; state every assumption.
-2. **Programming (50 points):** Implement a fresh example of the week's main technique using new inputs; write at least 3 passing tests and 2 adversarial tests.
-3. **Debugging (20 points):** Explain a broken constraint, invalid witness, or arithmetic failure and provide a corrected version.
-
-Pass: 75/100. Distinction: 90/100. Submit an exam report with score, code, tests and reflection.
-
-### Day 7 — Rest / catch-up
-
-## Weekly exit criteria
-
-- [ ] All assigned articles read
-- [ ] Video watched with notes (supplementary)
-- [ ] Worked derivation committed
-- [ ] Implementation tested, including adversarial inputs
-- [ ] Mock exam attempted and score recorded in `progress.csv`
+## Exit criteria
+- [ ] Naive QAP SNARK works end to end
+- [ ] Can forge a naive proof and explain why
+- [ ] Can explain why one honest ceremony participant is enough
+- [ ] Exam score in `progress.csv`
