@@ -2,9 +2,18 @@
 
 **Objectives:** toxic waste, powers of tau, knowledge assumptions, Pinocchio overview.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
 
-**Video:** [Trusted setup and Pinocchio lectures and walkthroughs](https://www.youtube.com/results?search_query=trusted%20setup%20Pinocchio%20zk%20SNARK) (search results; select a rigorous explanation).
+
+## Curated primary resources
+
+**Direct RareSkills chapters** (specific articles, not searches):
+- [Trusted Setup](https://rareskills.io/post/trusted-setup)
+- [QAP on Trusted Setup](https://rareskills.io/post/elliptic-curve-qap)
+
+**Direct YouTube videos** (verified titles/URLs from indexed metadata; applicability varies):
+- No individually verified, topic-matched YouTube recording found yet. Use the exact RareSkills reading above; do not substitute an unreviewed search result.
+
+**Source note:** Videos are supplementary and not presented as RareSkills bootcamp recordings. Chapters should be read in the order listed. Video links are provided only when an identifiable relevant recording was found.
 
 ## Daily schedule
 
