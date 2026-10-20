@@ -2,9 +2,18 @@
 
 **Objectives:** modular arithmetic, inverses, Fermat's theorem, field axioms, roots of unity.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
 
-**Video:** [Finite fields lectures and walkthroughs](https://www.youtube.com/results?search_query=finite%20field%20arithmetic%20Python) (search results; select a rigorous explanation).
+
+## Curated primary resources
+
+**Direct RareSkills chapters** (specific articles, not searches):
+- [Arithmetic Circuits](https://rareskills.io/post/arithmetic-circuit)
+- [Finite Fields](https://rareskills.io/post/finite-fields)
+
+**Direct YouTube videos** (verified titles/URLs from indexed metadata; applicability varies):
+- No individually verified, topic-matched YouTube recording found yet. Use the exact RareSkills reading above; do not substitute an unreviewed search result.
+
+**Source note:** Videos are supplementary and not presented as RareSkills bootcamp recordings. Chapters should be read in the order listed. Video links are provided only when an identifiable relevant recording was found.
 
 ## Daily schedule
 
