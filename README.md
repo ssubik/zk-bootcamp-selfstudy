@@ -4,6 +4,10 @@ Independent **12-week, 6-day/week** hands-on study plan inspired by the public [
 
 **Target:** 2–3 hours per study day. Days 1–5: 30m review, 45m reading/video, 60–90m coding, 15m notes. Day 6: timed mock exam. Day 7: rest/catch-up.
 
+## Start with the curated curriculum
+
+**[Daily RareSkills reading assignments and exam specifications](CURRICULUM.md)** are the current source of truth. The older weekly files are supplementary and contain outdated generic video-search prompts; those are not verified recommendations.
+
 ## Curriculum
 
 - [Week 01: Finite fields](weeks/week-01.md) — modular arithmetic, inverses, Fermat's theorem, field axioms, roots of unity
