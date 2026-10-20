@@ -1,51 +1,69 @@
-# Week 11: Ethereum verification
+# Week 11: Solidity Groth16 verification
 
-**Objectives:** BN254 precompiles, Solidity verifier, gas, public signals, replay resistance.
+**Duration:** five learning days (2–3 hours each), one 120-minute mock exam, one catch-up day. Independent exercises; not official RareSkills bootcamp material.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
+## Required RareSkills articles
 
-**Video:** [Ethereum verification lectures and walkthroughs](https://www.youtube.com/results?search_query=Groth16%20Solidity%20verifier%20snarkjs) (search results; select a rigorous explanation).
+- [Groth16 Explained](https://rareskills.io/post/groth16)
+- [Bilinear Pairings](https://rareskills.io/post/bilinear-pairing)
+- [Public and Private Inputs](https://rareskills.io/post/circom-public-private-inputs)
 
-## Daily schedule
+## Specific YouTube videos
+
+- [BattleZips: Zero Knowledge Tutorial #1 — Solidity](https://www.youtube.com/watch?v=zXHLIvIDO7w)
+
+These are direct watch URLs for identifiable videos, not search pages. Videos are supplementary; prioritize the RareSkills reading.
+
+## Day-by-day assignments
 
 ### Day 1
-Read the RareSkills ZK Book sections covering BN254 precompiles; write a one-page explanation and define 5 terms.
 
-**Deliverable:** commit your work under `solutions/week-11/day-1/` and record progress in `progress.csv`.
+Inspect Groth16 public-input verification and explain how public signals are bound to the verifier key.
+
+**Submission:** `solutions/week-11/day-1/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 2
-Watch [relevant lectures](https://www.youtube.com/results?search_query=Groth16%20Solidity%20verifier%20snarkjs); reproduce one derivation without notes.
 
-**Deliverable:** commit your work under `solutions/week-11/day-2/` and record progress in `progress.csv`.
+Read EIP-196 and EIP-197; annotate ECADD, ECMUL and pairing precompile usage in generated Solidity.
+
+**Submission:** `solutions/week-11/day-2/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 3
-Implement a minimal Python example for BN254 precompiles; add at least 3 deterministic tests.
 
-**Deliverable:** commit your work under `solutions/week-11/day-3/` and record progress in `progress.csv`.
+Create a minimal Circom circuit with one private witness and one public output; compile, generate witness and proof with snarkjs.
+
+**Submission:** `solutions/week-11/day-3/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 4
-Extend the implementation to cover Solidity verifier; test 2 edge cases and one deliberately invalid input.
 
-**Deliverable:** commit your work under `solutions/week-11/day-4/` and record progress in `progress.csv`.
+Export the Solidity verifier and call it from a Foundry test. Confirm valid proof passes and wrong public signal fails.
+
+**Submission:** `solutions/week-11/day-4/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 5
-Explain how ethereum verification connects to proof correctness or Solidity verification; refactor and document the code.
 
-**Deliverable:** commit your work under `solutions/week-11/day-5/` and record progress in `progress.csv`.
+Add negative tests: tampered proof, mismatched public input, replay in an application context, and field-boundary inputs. Document proof validity versus application authorization.
 
-### Day 6
-**Timed mock exam (120 min, 100 points):** 30 points: derive/explain two core concepts; 50 points: implement a fresh variant of this week's exercise with tests; 20 points: debug a deliberately broken implementation and explain the vulnerability.
+**Submission:** `solutions/week-11/day-5/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
-**Deliverable:** commit your work under `solutions/week-11/day-6/` and record progress in `progress.csv`.
+### Day 6 — Timed mock exam (120 minutes, 100 points)
 
-### Day 7 — Rest or catch-up
+**Theory (30):** Explain the Groth16 verifier pairing equation and public input binding (Week 11), or formalize the capstone's integer inequality and bounds (Week 12).
 
-## Weekly exam rubric
+**Coding (50):** Produce a fresh proof-verification scenario with 3 valid/boundary tests and 3 invalid tests; supply reproducible commands and results.
 
-- Theory (30): correctness of definitions, derivations, and assumptions.
-- Coding (50): functional correctness (30), edge cases (10), tests and clarity (10).
-- Debugging (20): identify error (10), explain impact (10).
+**Debugging (20):** Find and repair an underconstraint, missing range bound, public-input mismatch, or replay weakness; explain whether it is a proof-system or application-layer issue.
 
-**Pass:** 75/100. **Distinction:** 90/100. Retake after reviewing errors; do not simply copy the original answer.
+Pass ≥75; distinction ≥90. Save the attempt and a self-assessment; do not assume a passing grade without running the tests.
 
-**Reflection:** Which assumption was hardest to justify? What fails if the witness or inputs are malformed?
+### Day 7 — Catch-up and retrospective
+
+## Exit checklist
+
+- [ ] Read the linked RareSkills articles
+- [ ] Watch and summarize the linked videos
+- [ ] Commit source, test vectors, and reproducible commands
+- [ ] Demonstrate negative and boundary tests
+- [ ] Record mock exam score and remaining questions
+
+**Security:** Educational examples only. A valid proof does not by itself establish ownership, authorization, freshness, or replay protection.
