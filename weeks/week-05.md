@@ -1,59 +1,58 @@
 # Week 5: Pairings
 
-**Objectives:** G1 G2 GT, bilinearity, pairing checks, BN254 precompiles.
+**Source of truth:** [12-week curriculum](../CURRICULUM.md). Daily workload: 2–3 hours; Day 6 is a timed assessment; Day 7 rest/catch-up. This is an independent curriculum, not RareSkills' proprietary bootcamp.
 
+## Required RareSkills readings
 
+- [Bilinear pairings](https://rareskills.io/post/bilinear-pairing)
 
-## Curated primary resources
+## Specific YouTube videos
 
-**Direct RareSkills chapters** (specific articles, not searches):
-- [Bilinear Pairings](https://rareskills.io/post/bilinear-pairing)
+- [What is a SNARK? — Dan Boneh (ZK Whiteboard Sessions)](https://www.youtube.com/watch?v=h-94UhJLeck) — SNARK overview and circuit intuition
 
-**Direct YouTube videos** (verified titles/URLs from indexed metadata; applicability varies):
-- No individually verified, topic-matched YouTube recording found yet. Use the exact RareSkills reading above; do not substitute an unreviewed search result.
+These are identifiable videos, **not** video-search pages. Some are broader than the week's subject; the RareSkills articles are the precise technical reading. No claim that a video covers every mathematical detail.
 
-**Source note:** Videos are supplementary and not presented as RareSkills bootcamp recordings. Chapters should be read in the order listed. Video links are provided only when an identifiable relevant recording was found.
-
-## Daily schedule
+## Daily assignments
 
 ### Day 1
-Read the RareSkills ZK Book sections covering G1 G2 GT; write a one-page explanation and define 5 terms.
+Read [Bilinear pairings](https://rareskills.io/post/bilinear-pairing). Reproduce a mathematical derivation and implement a minimal Python or Circom example with three deterministic tests.
 
-**Deliverable:** commit your work under `solutions/week-05/day-1/` and record progress in `progress.csv`.
+Deliverable: `solutions/week-05/day-1/` with code, tests, and notes.
 
 ### Day 2
-Watch [relevant lectures](https://www.youtube.com/results?search_query=bilinear%20pairings%20zk%20SNARKs); reproduce one derivation without notes.
+Revisit [Bilinear pairings](https://rareskills.io/post/bilinear-pairing). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
 
-**Deliverable:** commit your work under `solutions/week-05/day-2/` and record progress in `progress.csv`.
+Deliverable: `solutions/week-05/day-2/` with code, tests, and notes.
 
 ### Day 3
-Implement a minimal Python example for G1 G2 GT; add at least 3 deterministic tests.
+Revisit [Bilinear pairings](https://rareskills.io/post/bilinear-pairing). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
 
-**Deliverable:** commit your work under `solutions/week-05/day-3/` and record progress in `progress.csv`.
+Deliverable: `solutions/week-05/day-3/` with code, tests, and notes.
 
 ### Day 4
-Extend the implementation to cover bilinearity; test 2 edge cases and one deliberately invalid input.
+Revisit [Bilinear pairings](https://rareskills.io/post/bilinear-pairing). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
 
-**Deliverable:** commit your work under `solutions/week-05/day-4/` and record progress in `progress.csv`.
+Deliverable: `solutions/week-05/day-4/` with code, tests, and notes.
 
 ### Day 5
-Explain how pairings connects to proof correctness or Solidity verification; refactor and document the code.
+Revisit [Bilinear pairings](https://rareskills.io/post/bilinear-pairing). Add negative and boundary tests; explain an invalid witness or arithmetic edge case; commit your notes.
 
-**Deliverable:** commit your work under `solutions/week-05/day-5/` and record progress in `progress.csv`.
+Deliverable: `solutions/week-05/day-5/` with code, tests, and notes.
 
-### Day 6
-**Timed mock exam (120 min, 100 points):** 30 points: derive/explain two core concepts; 50 points: implement a fresh variant of this week's exercise with tests; 20 points: debug a deliberately broken implementation and explain the vulnerability.
+### Day 6 — Mock bootcamp exam (120 minutes, 100 points)
 
-**Deliverable:** commit your work under `solutions/week-05/day-6/` and record progress in `progress.csv`.
+1. **Theory (30 points):** Derive the central equation or property from this week's required articles; state every assumption.
+2. **Programming (50 points):** Implement a fresh example of the week's main technique using new inputs; write at least 3 passing tests and 2 adversarial tests.
+3. **Debugging (20 points):** Explain a broken constraint, invalid witness, or arithmetic failure and provide a corrected version.
 
-### Day 7 — Rest or catch-up
+Pass: 75/100. Distinction: 90/100. Submit an exam report with score, code, tests and reflection.
 
-## Weekly exam rubric
+### Day 7 — Rest / catch-up
 
-- Theory (30): correctness of definitions, derivations, and assumptions.
-- Coding (50): functional correctness (30), edge cases (10), tests and clarity (10).
-- Debugging (20): identify error (10), explain impact (10).
+## Weekly exit criteria
 
-**Pass:** 75/100. **Distinction:** 90/100. Retake after reviewing errors; do not simply copy the original answer.
-
-**Reflection:** Which assumption was hardest to justify? What fails if the witness or inputs are malformed?
+- [ ] All assigned articles read
+- [ ] Video watched with notes (supplementary)
+- [ ] Worked derivation committed
+- [ ] Implementation tested, including adversarial inputs
+- [ ] Mock exam attempted and score recorded in `progress.csv`
