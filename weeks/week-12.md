@@ -1,51 +1,71 @@
-# Week 12: Capstone and review
+# Week 12: Capstone — private collateral eligibility
 
-**Objectives:** private collateral eligibility proof, threat model, integration tests, end-to-end demo.
+**Duration:** five learning days (2–3 hours each), one 120-minute mock exam, one catch-up day. Independent exercises; not official RareSkills bootcamp material.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
+## Required RareSkills articles
 
-**Video:** [Capstone and review lectures and walkthroughs](https://www.youtube.com/results?search_query=zero%20knowledge%20DeFi%20Circom%20Solidity) (search results; select a rigorous explanation).
+- [Circom language tutorial](https://rareskills.io/post/circom-tutorial)
+- [Intermediate Signals and Sub-Component](https://rareskills.io/post/circom-intermediate-signals)
+- [Public and Private Inputs](https://rareskills.io/post/circom-public-private-inputs)
+- [How Tornado Cash Works](https://rareskills.io/post/how-does-tornado-cash-work)
 
-## Daily schedule
+## Specific YouTube videos
+
+- [Workshop: Circom, SnarkJS and Solidity DApp](https://www.youtube.com/watch?v=1tw2wB5i9z8)
+- [BattleZips: Solidity Verifier Integration](https://www.youtube.com/watch?v=zXHLIvIDO7w)
+
+These are direct watch URLs for identifiable videos, not search pages. Videos are supplementary; prioritize the RareSkills reading.
+
+## Day-by-day assignments
 
 ### Day 1
-Read the RareSkills ZK Book sections covering private collateral eligibility proof; write a one-page explanation and define 5 terms.
 
-**Deliverable:** commit your work under `solutions/week-12/day-1/` and record progress in `progress.csv`.
+Write the threat model and specification: private amount A, private haircut H, public minimum T; constrain 0 ≤ H ≤ 10000 and bounds for A and T.
+
+**Submission:** `solutions/week-12/day-1/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 2
-Watch [relevant lectures](https://www.youtube.com/results?search_query=zero%20knowledge%20DeFi%20Circom%20Solidity); reproduce one derivation without notes.
 
-**Deliverable:** commit your work under `solutions/week-12/day-2/` and record progress in `progress.csv`.
+Implement circuit with integer semantics: eligible iff A*(10000-H) ≥ 10000*T; range-constrain values and multiplication to avoid finite-field wraparound. Define what the inequality means at equality.
+
+**Submission:** `solutions/week-12/day-2/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 3
-Implement a minimal Python example for private collateral eligibility proof; add at least 3 deterministic tests.
 
-**Deliverable:** commit your work under `solutions/week-12/day-3/` and record progress in `progress.csv`.
+Compile Circom; inspect constraints; generate valid and invalid witnesses including boundary cases, H=10000, T=0, and max configured amount.
+
+**Submission:** `solutions/week-12/day-3/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 4
-Extend the implementation to cover threat model; test 2 edge cases and one deliberately invalid input.
 
-**Deliverable:** commit your work under `solutions/week-12/day-4/` and record progress in `progress.csv`.
+Run snarkjs Groth16 setup, proof generation and verification with development-only ceremony material; export verifier and add Foundry integration tests.
+
+**Submission:** `solutions/week-12/day-4/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
 ### Day 5
-Explain how capstone and review connects to proof correctness or Solidity verification; refactor and document the code.
 
-**Deliverable:** commit your work under `solutions/week-12/day-5/` and record progress in `progress.csv`.
+Add nullifier or context-binding if the application needs one-time use, document replay protection and deployment assumptions, benchmark gas, write README demo and limitations.
 
-### Day 6
-**Timed mock exam (120 min, 100 points):** 30 points: derive/explain two core concepts; 50 points: implement a fresh variant of this week's exercise with tests; 20 points: debug a deliberately broken implementation and explain the vulnerability.
+**Submission:** `solutions/week-12/day-5/` with notes, implementation, and tests. Record progress in `progress.csv`.
 
-**Deliverable:** commit your work under `solutions/week-12/day-6/` and record progress in `progress.csv`.
+### Day 6 — Timed mock exam (120 minutes, 100 points)
 
-### Day 7 — Rest or catch-up
+**Theory (30):** Explain the Groth16 verifier pairing equation and public input binding (Week 11), or formalize the capstone's integer inequality and bounds (Week 12).
 
-## Weekly exam rubric
+**Coding (50):** Produce a fresh proof-verification scenario with 3 valid/boundary tests and 3 invalid tests; supply reproducible commands and results.
 
-- Theory (30): correctness of definitions, derivations, and assumptions.
-- Coding (50): functional correctness (30), edge cases (10), tests and clarity (10).
-- Debugging (20): identify error (10), explain impact (10).
+**Debugging (20):** Find and repair an underconstraint, missing range bound, public-input mismatch, or replay weakness; explain whether it is a proof-system or application-layer issue.
 
-**Pass:** 75/100. **Distinction:** 90/100. Retake after reviewing errors; do not simply copy the original answer.
+Pass ≥75; distinction ≥90. Save the attempt and a self-assessment; do not assume a passing grade without running the tests.
 
-**Reflection:** Which assumption was hardest to justify? What fails if the witness or inputs are malformed?
+### Day 7 — Catch-up and retrospective
+
+## Exit checklist
+
+- [ ] Read the linked RareSkills articles
+- [ ] Watch and summarize the linked videos
+- [ ] Commit source, test vectors, and reproducible commands
+- [ ] Demonstrate negative and boundary tests
+- [ ] Record mock exam score and remaining questions
+
+**Security:** Educational examples only. A valid proof does not by itself establish ownership, authorization, freshness, or replay protection.
