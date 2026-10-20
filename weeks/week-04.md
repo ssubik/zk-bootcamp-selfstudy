@@ -2,9 +2,17 @@
 
 **Objectives:** groups, point addition, scalar multiplication, subgroup order, BN254.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
 
-**Video:** [Elliptic curves lectures and walkthroughs](https://www.youtube.com/results?search_query=elliptic%20curve%20cryptography%20visual) (search results; select a rigorous explanation).
+
+## Curated primary resources
+
+**Direct RareSkills chapters** (specific articles, not searches):
+- [Elliptic Curves over Finite Fields](https://rareskills.io/post/elliptic-curves-finite-fields)
+
+**Direct YouTube videos** (verified titles/URLs from indexed metadata; applicability varies):
+- No individually verified, topic-matched YouTube recording found yet. Use the exact RareSkills reading above; do not substitute an unreviewed search result.
+
+**Source note:** Videos are supplementary and not presented as RareSkills bootcamp recordings. Chapters should be read in the order listed. Video links are provided only when an identifiable relevant recording was found.
 
 ## Daily schedule
 
