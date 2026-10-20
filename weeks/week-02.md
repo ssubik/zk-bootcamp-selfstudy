@@ -2,9 +2,18 @@
 
 **Objectives:** vectors, matrices, arithmetic gates, witness assignment, constraint systems.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
 
-**Video:** [Linear algebra and arithmetic circuits lectures and walkthroughs](https://www.youtube.com/results?search_query=arithmetic%20circuits%20R1CS%20explained) (search results; select a rigorous explanation).
+
+## Curated primary resources
+
+**Direct RareSkills chapters** (specific articles, not searches):
+- [Arithmetic Circuits](https://rareskills.io/post/arithmetic-circuit)
+- [R1CS](https://rareskills.io/post/rank-1-constraint-system)
+
+**Direct YouTube videos** (verified titles/URLs from indexed metadata; applicability varies):
+- No individually verified, topic-matched YouTube recording found yet. Use the exact RareSkills reading above; do not substitute an unreviewed search result.
+
+**Source note:** Videos are supplementary and not presented as RareSkills bootcamp recordings. Chapters should be read in the order listed. Video links are provided only when an identifiable relevant recording was found.
 
 ## Daily schedule
 
