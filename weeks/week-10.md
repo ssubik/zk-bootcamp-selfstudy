@@ -2,9 +2,19 @@
 
 **Objectives:** signals, templates, component constraints, witness generation, test vectors.
 
-**Reading:** [RareSkills ZK Book](https://rareskills.io/zk-book) — locate chapters by the topic keywords above.
 
-**Video:** [Circom and snarkjs lectures and walkthroughs](https://www.youtube.com/results?search_query=Circom%20snarkjs%20tutorial) (search results; select a rigorous explanation).
+
+## Curated primary resources
+
+**Direct RareSkills chapters** (specific articles, not searches):
+- [Introduction to Circom](https://rareskills.io/post/circom-intro)
+- [Hello World Circom](https://rareskills.io/post/hello-world-circom)
+
+**Direct YouTube videos** (verified titles/URLs from indexed metadata; applicability varies):
+- [BattleZips: Circom tutorial](https://www.youtube.com/watch?v=PyLwC7GaZY8)
+- [Christian Lacdael: Circom/snarkjs example](https://www.youtube.com/watch?v=2BHdTjpYmFg)
+
+**Source note:** Videos are supplementary and not presented as RareSkills bootcamp recordings. Chapters should be read in the order listed. Video links are provided only when an identifiable relevant recording was found.
 
 ## Daily schedule
 
